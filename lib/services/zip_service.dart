@@ -30,24 +30,18 @@ class ZipService {
       final filename = file.name;
 
       if (file.isFile) {
-        if (filename.contains('Chat')) {
-
+        if (filename.toLowerCase().startsWith('chat') ||
+            filename.endsWith('.opus')) {
+          final outPath = '${extractDir.path}/$name/$filename';
+          final outFile = File(outPath);
+          outFile.createSync(recursive: true);
+          outFile.writeAsBytesSync(file.content as List<int>);
         }
       }
 
-      final esDeseado = filename.contains('reporte') || filename.endsWith('.json');
-
-      final outPath = '${extractDir.path}/$filename';
-
-      if (file.isFile) {
-        final outFile = File(outPath);
-        outFile.createSync(recursive: true);
-        outFile.writeAsBytesSync(file.content as List<int>);
-      } else {
-        Directory(outPath).create(recursive: true);
-      }
+      return extractDir.path;
     }
 
-    return extractDir.path;
+    return null;
   }
 }
