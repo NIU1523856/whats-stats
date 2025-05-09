@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatstats/screens/zip_selector.dart';
+import 'package:whatstats/main_screen.dart';
 import 'app.dart';
 
 void main() {
@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: darkElegantScheme,
+        splashFactory: NoSplash.splashFactory,
         scaffoldBackgroundColor: darkElegantScheme.surface,
         textTheme: ThemeData.dark().textTheme.apply(
           bodyColor: darkElegantScheme.onSurface,
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
 
       initialRoute: '/',
       routes: {
-        '/': (context) => ZipSelector(),
+        '/': (context) => MainScreen(),
       },
     );
   }

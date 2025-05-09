@@ -4,8 +4,8 @@ import 'package:fl_chart/fl_chart.dart';
 
 
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class StatsScreen extends StatefulWidget {
+  const StatsScreen({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -19,10 +19,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<StatsScreen> createState() => _StatsScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _StatsScreenState extends State<StatsScreen> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -80,7 +80,14 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-
+            ChartCard(
+              title: "Estadísticas de combate",
+              chart: LineChart(
+                LineChartData(
+                  lineBarsData: LineChartBarData()
+                ),
+              ),
+            ),
           ],
         ),
       ),
