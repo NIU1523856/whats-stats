@@ -26,22 +26,31 @@ class ZipService {
     }
     extractDir.createSync(recursive: true);
 
+
+    final saveDir = Directory('${appDocDir.path}/chats/$name');
+    if (saveDir.existsSync()) {
+      saveDir.deleteSync(recursive: true);
+    }
+    saveDir.createSync(recursive: true);
+
+
     for (final file in archive) {
       final filename = file.name;
 
       if (file.isFile) {
         if (filename.toLowerCase().startsWith('chat') ||
             filename.endsWith('.opus')) {
-          final outPath = '${extractDir.path}/$name/$filename';
+          final outPath = '${saveDir.path}/$filename';
           final outFile = File(outPath);
           outFile.createSync(recursive: true);
           outFile.writeAsBytesSync(file.content as List<int>);
         }
       }
 
-      return extractDir.path;
     }
-
-    return null;
+    if (extractDir.existsSync()) {
+      extractDir.deleteSync(recursive: true);
+    }
+    return saveDir.path;
   }
 }
